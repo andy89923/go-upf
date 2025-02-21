@@ -21,6 +21,7 @@ type Config struct {
 	Description string    `yaml:"description" valid:"optional"`
 	Pfcp        *Pfcp     `yaml:"pfcp"        valid:"required"`
 	Gtpu        *Gtpu     `yaml:"gtpu"        valid:"required"`
+	Sbi         *Sbi      `yaml:"sbi" valid:"required"`
 	DnnList     []DnnList `yaml:"dnnList"     valid:"required"`
 	Logger      *Logger   `yaml:"logger"      valid:"required"`
 }
@@ -72,6 +73,10 @@ type Logger struct {
 
 func (c *Config) GetVersion() string {
 	return c.Version
+}
+
+func (c *Config) GetSbiConfig() *Sbi {
+	return c.Sbi
 }
 
 func (c *Config) Print() {
