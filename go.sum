@@ -14,6 +14,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/free5gc/go-gtp5gnl v1.4.7-0.20241008130314-a3088e4cb7fa h1:D5OzFSttS6WY2XRspxtPKoHyCVkRLH9kqteQ1bGfOg0=
 github.com/free5gc/go-gtp5gnl v1.4.7-0.20241008130314-a3088e4cb7fa/go.mod h1:TT5aXB90NuSPMehuIK9lV2yJFnq6Qjw37ZqNB1QAKh0=
+github.com/free5gc/openapi v1.0.8 h1:QjfQdB6VVA1GRnzOJ7nILzrI7gMiY0lH64JHVW7vF34=
+github.com/free5gc/openapi v1.0.8/go.mod h1:w6y9P/uySczc1d9OJZAEuB2FImR/z60Wg2BekPAVt3M=
 github.com/free5gc/util v1.0.6 h1:dBt9drcXtYKE/cY5XuQcuffgsYclPIpIArhSeS6M+DQ=
 github.com/free5gc/util v1.0.6/go.mod h1:eSGN7POUM8LNTvg/E591XR6447a6/w1jFWGKNZPHcXw=
 github.com/gabriel-vasile/mimetype v1.4.2 h1:w5qFW6JKBz9Y393Y4q372O9A7cUSequkh1Q7OhCmWKU=
@@ -32,6 +34,8 @@ github.com/go-playground/validator/v10 v10.14.0 h1:vgvQWe3XCz3gIeFDm/HnTIbj6UGmg
 github.com/go-playground/validator/v10 v10.14.0/go.mod h1:9iXMNT7sEkjXb0I+enO7QXmzG6QCsPWY4zveKFVRSyU=
 github.com/goccy/go-json v0.10.2 h1:CrxCmQqYDkv1z7lO7Wbh2HN93uovUHgrECaO5ZrCXAU=
 github.com/goccy/go-json v0.10.2/go.mod h1:6MelG93GURQebXPDq3khkgXZkazVtN9CRI+MGFi0w8I=
+github.com/golang-jwt/jwt v3.2.1+incompatible h1:73Z+4BJcrTC+KczS6WvTPvRGOp1WmfEP4Q1lOd9Z/+c=
+github.com/golang-jwt/jwt v3.2.1+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzqecmYZeUEB8OUGHkxJ+I=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=

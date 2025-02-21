@@ -6,6 +6,7 @@ import (
 	"github.com/davecgh/go-spew/spew"
 
 	"github.com/free5gc/go-upf/internal/logger"
+	"github.com/free5gc/openapi/models"
 )
 
 const (
@@ -16,12 +17,25 @@ const (
 )
 
 type Config struct {
-	Version     string    `yaml:"version"     valid:"required,in(1.0.3)"`
+	Version     string    `yaml:"version"     valid:"required,in(1.0.4)"`
 	Description string    `yaml:"description" valid:"optional"`
 	Pfcp        *Pfcp     `yaml:"pfcp"        valid:"required"`
 	Gtpu        *Gtpu     `yaml:"gtpu"        valid:"required"`
 	DnnList     []DnnList `yaml:"dnnList"     valid:"required"`
 	Logger      *Logger   `yaml:"logger"      valid:"required"`
+}
+
+type Sbi struct {
+	Scheme     models.UriScheme `yaml:"scheme" valid:"required,in(http|https)"`
+	BindingIp  string           `yaml:"bindingIp" valid:"required,host"`
+	RegisterIp string           `yaml:"registerIp" valid:"required,host"`
+	Port       uint16           `yaml:"port" valid:"required"`
+	Cert       *Cert            `yaml:"cert,omitempty" valid:"optional"`
+}
+
+type Cert struct {
+	Pem string `yaml:"pem,omitempty" valid:"type(string),minstringlength(1),required"`
+	Key string `yaml:"key,omitempty" valid:"type(string),minstringlength(1),required"`
 }
 
 type Pfcp struct {
