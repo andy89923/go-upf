@@ -6,7 +6,9 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/davecgh/go-spew v1.1.1
 	github.com/free5gc/go-gtp5gnl v1.4.7-0.20241008130314-a3088e4cb7fa
+	github.com/free5gc/openapi v1.0.8
 	github.com/free5gc/util v1.0.6
+	github.com/gin-gonic/gin v1.9.1
 	github.com/hashicorp/go-version v1.6.0
 	github.com/khirono/go-genl v1.0.1
 	github.com/khirono/go-nl v1.0.5
@@ -26,11 +28,11 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
-	github.com/gin-gonic/gin v1.9.1 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.14.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
