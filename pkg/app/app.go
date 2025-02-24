@@ -87,6 +87,9 @@ func (u *UpfApp) Run() error {
 	if err != nil {
 		return err
 	}
+	if err := u.sbiServer.Start(u.ctx, &u.wg); err != nil {
+		logger.MainLog.Errorf("SBI Server start failed: %v", err)
+	}
 
 	logger.MainLog.Infoln("UPF started")
 

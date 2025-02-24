@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/free5gc/go-upf/internal/logger"
+	"github.com/free5gc/go-upf/internal/sbi/consumer"
 	"github.com/free5gc/go-upf/pkg/factory"
 	"github.com/free5gc/openapi/models"
 	"github.com/free5gc/util/httpwrapper"
@@ -23,6 +24,7 @@ type UPF interface {
 type Server struct {
 	UPF
 
+	consumer   *consumer.Consumer
 	httpServer *http.Server
 	router     *gin.Engine
 }
@@ -35,10 +37,16 @@ func NewServer(upf UPF, tlsKeyLogPath string) (*Server, error) {
 	s.ApplyService()
 
 	cfg := upf.Config().GetSbiConfig()
-	logger.SBILog.Infof("SBI Binding: %s:%d", cfg.BindingIp, cfg.Port)
+	bindingAddr := fmt.Sprintf("%s:%d", cfg.BindingIp, cfg.Port)
+	logger.SBILog.Infof("SBI Binding: %s", bindingAddr)
 
 	var err error
-	if s.httpServer, err = httpwrapper.NewHttp2Server(cfg.BindingIp, tlsKeyLogPath, s.router); err != nil {
+	s.consumer, err = consumer.NewConsumer(upf)
+	if err != nil {
+		return nil, err
+	}
+
+	if s.httpServer, err = httpwrapper.NewHttp2Server(bindingAddr, tlsKeyLogPath, s.router); err != nil {
 		return nil, err
 	}
 	s.httpServer.ReadHeaderTimeout = 3 * time.Second
@@ -53,8 +61,11 @@ func (s *Server) ApplyService() {
 }
 
 func (s *Server) Start(ctx context.Context, wg *sync.WaitGroup) error {
-	// TODO
-	// register UPF to NRF
+	if s.consumer != nil {
+		if _, _, err := s.consumer.RegisterNFInstance(ctx, s.Config().GetSbiConfig().NrfUri); err != nil {
+			return err
+		}
+	}
 
 	wg.Add(1)
 	go s.startServer(wg)
@@ -89,9 +100,13 @@ func (s *Server) startServer(wg *sync.WaitGroup) {
 }
 
 func (s *Server) Stop() {
-	// TODO
-	// deregister UPF from NRF
-
+	if s.consumer != nil {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if err := s.consumer.DeregisterNfInstance(ctx, s.Config().Sbi.NrfUri); err != nil {
+			logger.SBILog.Errorf("Deregister NFInstance error: %v", err)
+		}
+	}
 	if s.httpServer != nil {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
