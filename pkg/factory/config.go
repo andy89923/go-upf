@@ -32,6 +32,7 @@ type Sbi struct {
 	RegisterIp string           `yaml:"registerIp" valid:"required,host"`
 	Port       uint16           `yaml:"port" valid:"required"`
 	Cert       *Cert            `yaml:"cert,omitempty" valid:"optional"`
+	NrfUri     string           `yaml:"nrfUri" valid:"url,required"`
 }
 
 type Cert struct {
