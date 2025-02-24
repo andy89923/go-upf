@@ -4,8 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/free5gc/nwdaf/pkg/components"
 	"github.com/gin-gonic/gin"
+
+	"github.com/free5gc/nwdaf/pkg/components"
 )
 
 func (s *Server) getNwdafOamRoutes() []Route {

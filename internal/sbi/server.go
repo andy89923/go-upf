@@ -62,9 +62,14 @@ func (s *Server) ApplyService() {
 
 func (s *Server) Start(ctx context.Context, wg *sync.WaitGroup) error {
 	if s.consumer != nil {
-		if _, _, err := s.consumer.RegisterNFInstance(ctx, s.Config().GetSbiConfig().NrfUri); err != nil {
-			return err
-		}
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			time.Sleep(1 * time.Second) // Wait for NRF to be ready
+			if _, _, err := s.consumer.RegisterNFInstance(ctx, s.Config().GetSbiConfig().NrfUri); err != nil {
+				logger.MainLog.Errorf("Register NFInstance error: %v", err)
+			}
+		}()
 	}
 
 	wg.Add(1)
