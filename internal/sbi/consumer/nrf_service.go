@@ -69,7 +69,6 @@ func (s *nnrfService) RegisterNFInstance(ctx context.Context, nfUri string,
 			res, errDo := client.NFInstanceIDDocumentApi.RegisterNFInstance(context.Background(), registerNFInstanceRequest)
 			if errDo != nil || res == nil {
 				logger.SBILog.Errorf("UPF register to NRF Error[%v]", errDo)
-				logger.SBILog.Errorf("%v", res)
 				time.Sleep(2 * time.Second)
 				continue
 			}
