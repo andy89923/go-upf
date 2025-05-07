@@ -59,6 +59,9 @@ type PfcpServer struct {
 	rxTrans      map[string]*RxTransaction // key: RemoteAddr-Sequence
 	txSeq        uint32
 	log          *logrus.Entry
+
+	SessionReportRequestTimeoutCount     int
+	SessionReportRequestTimeoutCountlock sync.Mutex
 }
 
 func NewPfcpServer(cfg *factory.Config, driver forwarder.Driver) *PfcpServer {
@@ -76,6 +79,8 @@ func NewPfcpServer(cfg *factory.Config, driver forwarder.Driver) *PfcpServer {
 		txTrans:      make(map[string]*TxTransaction),
 		rxTrans:      make(map[string]*RxTransaction),
 		log:          logger.PfcpLog.WithField(logger_util.FieldListenAddr, listen),
+
+		SessionReportRequestTimeoutCount: 0,
 	}
 }
 

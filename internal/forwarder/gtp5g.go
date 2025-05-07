@@ -1222,6 +1222,7 @@ func (g *Gtp5g) UpdateURR(lSeid uint64, req *ie.IE) ([]report.USAReport, error) 
 				return nil, err1
 			}
 			urrid = uint64(v)
+			fmt.Printf("GTP5G IE UpdateURR URRID: %d\n", urrid)
 		case ie.MeasurementMethod:
 			v, err1 := i.MeasurementMethod()
 			if err1 != nil {
@@ -1265,6 +1266,9 @@ func (g *Gtp5g) UpdateURR(lSeid uint64, req *ie.IE) ([]report.USAReport, error) 
 				Value: nl.AttrU64(v),
 			})
 		case ie.VolumeThreshold:
+			fmt.Printf("GTP5G IE UpdateURR VolumeThreshold: %v\n", i)
+			// GTP5G UpdateURR VolumeThreshold: &{31 25 0 [7 0 0 0 0 0 0 11 184 0 0 0 0 0 0 11 184 0 0 0 0 0 0 11 184] []}
+			// GTP5G UpdateURR VolumeThreshold: &{31 25 0 [7 0 0 0 0 0 0 19 136 0 0 0 0 0 0 19 136 0 0 0 0 0 0 19 136] []}
 			v, err1 := g.newVolumeThreshold(i)
 			if err1 != nil {
 				break
@@ -1285,6 +1289,7 @@ func (g *Gtp5g) UpdateURR(lSeid uint64, req *ie.IE) ([]report.USAReport, error) 
 		}
 
 		// TODO: should apply PERIO updateURR and receive final report from old URR
+		// CTFang
 	}
 
 	oid := gtp5gnl.OID{lSeid, urrid}
@@ -1294,6 +1299,7 @@ func (g *Gtp5g) UpdateURR(lSeid uint64, req *ie.IE) ([]report.USAReport, error) 
 	}
 
 	if rs == nil {
+		// RS will be nil, nil
 		return nil, nil
 	}
 

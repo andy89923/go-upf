@@ -90,7 +90,7 @@ func (s *PfcpServer) serveDLDReport(addr net.Addr, lSeid uint64, pdrid uint16) e
 }
 
 func (s *PfcpServer) serveUSAReport(addr net.Addr, lSeid uint64, usars []report.USAReport) error {
-	s.log.Infoln("serveUSAReport")
+	// s.log.Errorln("serveUSAReport")
 
 	sess, err := s.lnode.Sess(lSeid)
 	if err != nil {
@@ -117,6 +117,8 @@ func (s *PfcpServer) serveUSAReport(addr net.Addr, lSeid uint64, usars []report.
 				r.IEsWithinSessReportReq(
 					urrInfo.MeasureMethod, urrInfo.MeasureInformation)...,
 			))
+
+		// s.log.Warnf("URRID(%d), Method(%v), Information(%v)", r.URRID, urrInfo.MeasureMethod, r.VolumMeasure)
 	}
 
 	err = s.sendReqTo(req, addr)

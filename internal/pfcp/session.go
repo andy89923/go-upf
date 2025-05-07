@@ -262,6 +262,7 @@ func (s *PfcpServer) handleSessionModificationRequest(
 	}
 
 	for _, i := range req.UpdateURR {
+		sess.log.Errorln("PFCP UpdateURR")
 		rs, err1 := sess.UpdateURR(i)
 		if err1 != nil {
 			sess.log.Errorf("Mod UpdateURR error: %+v", err1)
@@ -431,8 +432,14 @@ func (s *PfcpServer) handleSessionReportRequestTimeout(
 	req *message.SessionReportRequest,
 	addr net.Addr,
 ) {
-	s.log.Warnf("handleSessionReportRequestTimeout: SEID[%#x]", req.SEID())
-	// TODO?
+	// CTFang: now have many session report request timeout
+	// s.log.Warnf("handleSessionReportRequestTimeout: SEID[%#x], ADDR[%+v]", req.SEID(), addr)
+
+	s.SessionReportRequestTimeoutCountlock.Lock()
+	defer s.SessionReportRequestTimeoutCountlock.Unlock()
+
+	s.SessionReportRequestTimeoutCount++
+	s.log.Errorf("SessionReportRequestTimeoutCount: %d", s.SessionReportRequestTimeoutCount)
 }
 
 // getUEAddressFromPDR returns the UEIPaddress() from the PDR IE.
